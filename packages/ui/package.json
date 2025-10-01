@@ -1,0 +1,22 @@
+{
+	"name": "@turbo-pokedex/ui",
+	"type": "module",
+	"version": "1.0.0",
+	"private": true,
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "tsc --build",
+		"dev": "tsc --watch"
+	},
+	"peerDependencies": {
+		"react": "19.1.1",
+		"react-dom": "19.1.1"
+	},
+	"devDependencies": {
+		"typescript": "^5.3.0",
+		"react": "19.1.1",
+		"@types/react": "19.1.1",
+		"@types/react-dom": "19.1.1"
+	}
+}
