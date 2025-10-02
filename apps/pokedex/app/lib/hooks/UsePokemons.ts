@@ -7,14 +7,9 @@ import {
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-type UsePokemonsListProps = {
-	page: number;
-	pageSize: number;
-};
-export function UsePokemonsList({ page, pageSize }: UsePokemonsListProps) {
+export function UsePokemonsList(page: number, pageSize: number) {
 	const queryClient = useQueryClient();
 	const offset = (page - 1) * pageSize;
-	console.log("llamo hook");
 	return useQuery({
 		queryKey: ["pokemons:list", pageSize, offset],
 		queryFn: async () => {

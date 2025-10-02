@@ -17,11 +17,7 @@ export default function PokemonsTable({
 	onSelect,
 	onPageChange,
 }: PokemonsTableProps) {
-	console.log("me llamo page", page);
-	const { data, isLoading, isError, isFetching } = UsePokemonsList(
-		page,
-		pageSize,
-	);
+	const { data, isLoading, isError, isFetching } = UsePokemonsList(page, 20);
 	console.log("data", data);
 
 	if (isLoading) return <p>Loading pokemons…</p>;
@@ -29,7 +25,7 @@ export default function PokemonsTable({
 
 	//data.count -> available pokemons
 	const totalPages = Math.ceil(data.count / 20);
-
+	//ANADIR QUE LOS LIMITES DE PAGINACIOOOOOOOONNNN
 	return (
 		<div>
 			<div style={{ marginBottom: "1rem" }}>
