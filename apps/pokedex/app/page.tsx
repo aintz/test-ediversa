@@ -1,97 +1,63 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Button } from "@turbo-pokedex/ui";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import HomeClient from "./HomeClient";
+import { fetchFullList } from "./lib/hooks/useMasterIndex";
+import { Providers } from "./providers";
+import PokemonsTableStatic from "./components/PokemonsTableStatic";
+import styles from "./styles/page.module.css";
+import PageTitle from "../../../packages/ui/src/PageTitle";
+import "./styles/global.css";
 
-export default function Home() {
+type PageSearchParams = {
+	page?: string;
+	[key: string]: string | string[] | undefined;
+};
+
+export default async function Home({
+	searchParams,
+}: {
+	searchParams?: Promise<PageSearchParams>;
+}) {
+	const pageSize = 10;
+	const params = await searchParams;
+	const page = Math.max(1, Number(params?.page ?? "1"));
+
+	const queryClient = new QueryClient();
+	await queryClient.prefetchQuery({
+		queryKey: ["fullPokemonList"],
+		queryFn: fetchFullList,
+	});
+
+	const dehydratedState = dehydrate(queryClient);
+	const fullIndexData = queryClient.getQueryData(["fullPokemonList"]) as
+		| { name: string; url: string }[]
+		| undefined;
+
+	const start = (page - 1) * pageSize;
+	const end = start + pageSize;
+	const firstPage = fullIndexData?.slice(start, end) ?? [];
+
+	const staticDetails = await Promise.all(
+		firstPage.map(async (pokemon) => {
+			try {
+				const res = await fetch(pokemon.url);
+				if (!res.ok) throw new Error("Failed to fetch Pokémon details");
+				return await res.json();
+			} catch (e) {
+				console.error(e);
+				return null;
+			}
+		}),
+	);
+
+	const filteredStaticDetails = staticDetails.filter(Boolean);
+
 	return (
-		<div className={styles.page}>
-			<main className={styles.main}>
-				<Image
-					className={styles.logo}
-					src="/next.svg"
-					alt="Next.js logo"
-					width={180}
-					height={38}
-					priority
-				/>
-				<Button>pepe</Button>
-				<ol>
-					<li>
-						Get started by editing <code>app/page.tsx</code>.
-					</li>
-					<li>Save and see your changes instantly.</li>
-				</ol>
-
-				<div className={styles.ctas}>
-					<a
-						className={styles.primary}
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Image
-							className={styles.logo}
-							src="/vercel.svg"
-							alt="Vercel logomark"
-							width={20}
-							height={20}
-						/>
-						Deploy now
-					</a>
-					<a
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-						className={styles.secondary}
-					>
-						Read our docs
-					</a>
-				</div>
-			</main>
-			<footer className={styles.footer}>
-				<a
-					href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/file.svg"
-						alt="File icon"
-						width={16}
-						height={16}
-					/>
-					Learn
-				</a>
-				<a
-					href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/window.svg"
-						alt="Window icon"
-						width={16}
-						height={16}
-					/>
-					Examples
-				</a>
-				<a
-					href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/globe.svg"
-						alt="Globe icon"
-						width={16}
-						height={16}
-					/>
-					Go to nextjs.org →
-				</a>
-			</footer>
-		</div>
+		<main className={styles.container}>
+			<PageTitle title="Pokédex" imageUrl="/pokemon-logo.png" />
+			<PokemonsTableStatic data={filteredStaticDetails} />
+			<Providers dehydratedState={dehydratedState}>
+				<HomeClient initialPage={page} pageSize={pageSize} />
+			</Providers>
+		</main>
 	);
 }

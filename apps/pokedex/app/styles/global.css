@@ -1,0 +1,13 @@
+:root {
+	--color-bg-top: #f5f3f7;
+	--color-bg-bottom: #e9e6ee;
+	--color-text: #2b2b2b;
+	--color-primary: #5b4b8a;
+	--color-border: #cfc9d8;
+	--color-border-dark: #2b2b2b;
+	--font-main: "Space Grotesk", sans-serif;
+}
+
+.no-display {
+	display: none;
+}
