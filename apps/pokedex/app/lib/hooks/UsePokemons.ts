@@ -7,7 +7,7 @@ import {
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export function UsePokemonsList(page: number, pageSize: number) {
+export function usePokemonsList(page: number, pageSize: number) {
 	const queryClient = useQueryClient();
 	const offset = (page - 1) * pageSize;
 	return useQuery({
@@ -32,7 +32,7 @@ export function UsePokemonsList(page: number, pageSize: number) {
 	});
 }
 
-export function UsePokemon(name: string | null) {
+export function usePokemon(name: string | null) {
 	return useQuery({
 		queryKey: ["pokemon", name],
 		queryFn: () => getPokemonByName(name as string),
