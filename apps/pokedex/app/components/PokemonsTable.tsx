@@ -10,26 +10,9 @@ type PokemonsTableProps = {
 	onSelect: (name: string) => void;
 };
 
-export default function PokemonsTable({
-	data,
-	isStale,
-	onSelect,
-}: PokemonsTableProps) {
-	// Aquí podrías mantener un filtro local si fuera necesario,
-	// pero para simplicidad y para evitar confusión, lo omitimos por ahora.
-
-	const tableOpacity = isStale ? 0.6 : 1;
-
+export default function PokemonsTable({ data, onSelect }: PokemonsTableProps) {
 	return (
-		// ⚠️ Nota: Ya no hay botones de paginación ni inputs aquí.
-		<table
-			style={{
-				width: "100%",
-				borderCollapse: "collapse",
-				opacity: tableOpacity,
-				transition: "opacity 0.3s",
-			}}
-		>
+		<table>
 			<thead>
 				<tr>
 					<th align="left">Miniatura</th>
@@ -43,22 +26,24 @@ export default function PokemonsTable({
 			<tbody>
 				{data.length > 0 ? (
 					data.map((p) => (
-						<tr key={p.name} style={{ borderTop: "1px solid #eee" }}>
-							{/* ... celdas de datos ... */}
-							<td style={{ textTransform: "capitalize" }}>{p.name}</td>
+						<tr key={p.name}>
+							<td>
+								{p.sprites.front_default && (
+									<img src={p.sprites.front_default} alt={p.name} width={50} />
+								)}
+							</td>
+							<td>{p.name}</td>
 							<td>{p.base_experience}</td>
 							<td>{p.types?.map((t) => t.type.name).join(", ")}</td>
 							<td>{p.abilities?.map((a) => a.ability.name).join(", ")}</td>
 							<td>
-								<Button onClick={() => onSelect(p.name)}>Detalles</Button>
+								<Button onClick={() => onSelect(p.name)}>Más detalles</Button>
 							</td>
 						</tr>
 					))
 				) : (
 					<tr>
-						<td colSpan={6} style={{ textAlign: "center", padding: "16px" }}>
-							No hay datos para mostrar.
-						</td>
+						<td colSpan={6}>No hay datos para mostrar.</td>
 					</tr>
 				)}
 			</tbody>

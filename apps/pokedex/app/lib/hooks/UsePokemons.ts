@@ -35,8 +35,11 @@ export function usePokemonsList(page: number, pageSize: number) {
 export function usePokemon(name: string | null) {
 	return useQuery({
 		queryKey: ["pokemon", name],
-		queryFn: () => getPokemonByName(name as string),
+		queryFn: () => {
+			if (!name) throw new Error("Invalid pokemon name");
+			return getPokemonByName(name as string);
+		},
 		enabled: !!name,
-		staleTime: Infinity,
+		staleTime: 5 * 60 * 1000,
 	});
 }
