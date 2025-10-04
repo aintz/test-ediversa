@@ -7,6 +7,7 @@ import {
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+/*
 export function usePokemonsList(page: number, pageSize: number) {
 	const queryClient = useQueryClient();
 	const offset = (page - 1) * pageSize;
@@ -30,7 +31,7 @@ export function usePokemonsList(page: number, pageSize: number) {
 		placeholderData: (prev) => prev,
 		staleTime: 5 * 60 * 1000, //5 minutes
 	});
-}
+}*/
 
 export function usePokemon(name: string | null) {
 	return useQuery({

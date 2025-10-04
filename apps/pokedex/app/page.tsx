@@ -3,7 +3,7 @@ import {
 	QueryClient,
 	dehydrate,
 } from "@tanstack/react-query";
-import IndexClient from "./IndexClient";
+import HomeClient from "./HomeClient";
 import { getPokemonsPage } from "./lib/api/fetchPokemosPage";
 import type { SearchParams } from "next/dist/server/request/search-params";
 
@@ -30,7 +30,7 @@ export default async function Home({
 		<main>
 			<h1>Pokédex (SSR)</h1>
 			<HydrationBoundary state={dehydratedState}>
-				<IndexClient initialPage={page} pageSize={pageSize} />
+				<HomeClient initialPage={page} pageSize={pageSize} />
 			</HydrationBoundary>
 		</main>
 	);

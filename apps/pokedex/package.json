@@ -2,7 +2,9 @@
 	"name": "pokedex",
 	"version": "0.1.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
+		"prebuild": "node data/scripts/generate-pokemons-list.js",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
