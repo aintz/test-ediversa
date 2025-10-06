@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"prebuild": "node data/scripts/generate-pokemons-list.js",
+		"generate-pokemon-list": "node data/scripts/generate-pokemons-list.js",
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
