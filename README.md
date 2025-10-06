@@ -124,7 +124,7 @@ Y se utiliza en la página principal junto con los componentes de tabla y modal 
 
 ---
 
-## 🧑‍💻 Autor
+## Autor
 
 Desarrollado por **Aintzane**  
 Diseño y desarrollo de la arquitectura Turborepo + Next.js + UI Library.
@@ -132,10 +132,10 @@ Diseño y desarrollo de la arquitectura Turborepo + Next.js + UI Library.
 ---
 
 ## Posibles mejoras
-
-- 🔁 **Ordenamiento completo:** Actualmente, el ordenamiento de la tabla solo funciona para la columna de *Nombre*. Debería ampliarse para que sea funcional también en las columnas de *XP Base*, *Tipos*, *Habilidades*, etc.  
-- 🔍 **Compatibilidad sin JavaScript:** En la versión estática (sin JS activado) falta implementar las funcionalidades de búsqueda y navegación entre páginas.  
-- ⚙️ **Mejoras de UI/UX:** Podría incorporarse paginación más visual, filtros por tipo de Pokémon y una vista de detalles más rica (sprites adicionales, estadísticas, etc.).  
+- Documentación de componentes con Storybook.
+- **Ordenamiento completo:** Actualmente, el ordenamiento de la tabla solo funciona para la columna de *Nombre*. Debería ampliarse para que sea funcional también en las columnas de *XP Base*, *Tipos*, *Habilidades*, etc.  
+- **Compatibilidad sin JavaScript:** En la versión estática (sin JS activado) falta implementar las funcionalidades de búsqueda y navegación entre páginas.  
+- **Mejoras de UI/UX:** Podría incorporarse paginación más visual, filtros por tipo de Pokémon y una vista de detalles más rica (sprites adicionales, estadísticas, etc.).  
 
 ---
 
