@@ -1,21 +1,10 @@
-const isCI = process.env.CI === "true";
+const isCI = process.env.CI === "true" || process.env.NODE_ENV === "production";
 
 if (isCI) {
-	console.log(
-		"Skipping custom Babel config in CI for faster builds (SWC active).",
-	);
+	console.log("Skipping Babel config in CI/Production (SWC active)");
 	module.exports = {};
 } else {
 	module.exports = {
-		presets: [
-			["@babel/preset-env", { targets: { node: "current" } }],
-			[
-				"@babel/preset-react",
-				{
-					runtime: "automatic",
-				},
-			],
-			"@babel/preset-typescript",
-		],
+		presets: ["next/babel"],
 	};
 }
