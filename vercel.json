@@ -1,7 +1,0 @@
-{
-	"buildCommand": "cd apps/pokedex && npm run build",
-	"outputDirectory": "apps/pokedex/.next",
-	"installCommand": "npm install",
-	"framework": "nextjs",
-	"rootDirectory": "apps/pokedex"
-}
