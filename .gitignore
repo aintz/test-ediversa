@@ -37,3 +37,4 @@ pnpm-debug.log*
 # Mac/OSX system files
 *.swp
 *.swo
+.vercel
