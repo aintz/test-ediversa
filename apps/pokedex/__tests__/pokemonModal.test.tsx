@@ -1,13 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import type { PokemonModalDetail } from "@/app/lib/types/pokemon";
 import "@testing-library/jest-dom";
 import PokemonModal from "@/app/components/PokemonModal";
 import userEvent from "@testing-library/user-event";
-
-jest.mock("next/image", () => ({
-	__esModule: true,
-	default: (props: any) => <img {...props} alt={props.alt || "mocked image"} />,
-}));
 
 const mockData: PokemonModalDetail = {
 	id: 25,

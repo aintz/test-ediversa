@@ -3,16 +3,6 @@ import PokemonsTable from "@/app/components/PokemonsTable";
 import type { PokemonDetail } from "@/app/lib/types/pokemon";
 import "@testing-library/jest-dom";
 
-describe("Sanity check", () => {
-	it("runs a basic test", () => {
-		expect(1 + 1).toBe(2);
-	});
-});
-
-jest.mock("next/image", () => ({
-	__esModule: true,
-	default: (props: any) => <img {...props} alt={props.alt || "mocked image"} />,
-}));
 const mockInstance = {
 	getHeaderGroups: () => [
 		{
